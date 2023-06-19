@@ -1,0 +1,320 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<!-- personal detail functionality  -->
+<script>
+  function populateData() {
+    var pnoSelect = document.getElementById("pno");
+    var nameInput = document.getElementById("name");
+    var emailInput = document.getElementById("email");
+    var welcomeMessageSpan = document.getElementById("welcome-message");
+    var messageContainer = document.getElementById("message-container");
+    // Get the selected option's value
+    var selectedPno = pnoSelect.value;
+    // Perform a lookup based on the selected value
+    var data = {
+      "1": {
+        name: "John Doe",
+        email: "john@example.com"
+      },
+      "2": {
+        name: "Jane Smith",
+        email: "jane@example.com"
+      },
+      "3": {
+        name: "Bob Johnson",
+        email: "bob@example.com"
+      }
+    };// Populate the name and email inputs
+    if (data[selectedPno]) {
+      nameInput.value = data[selectedPno].name;
+      emailInput.value = data[selectedPno].email;
+      document.getElementById("email-error").textContent = ""; // Clear any previous error message
+      // Make the inputs read-only
+      nameInput.readOnly = true;
+      emailInput.readOnly = true;
+      // Set font-weight to bold
+      nameInput.style.fontWeight = "bold";
+      emailInput.style.fontWeight = "bold"; 
+      // Display welcome message
+      var welcomeMessage = "Welcome, " + data[selectedPno].name;
+      // Update the welcome message span text
+      welcomeMessageSpan.textContent = welcomeMessage;
+      messageContainer.style.display = "block";
+    } else {
+      nameInput.value = "";
+      emailInput.value = "";
+      // Display an error message
+      document.getElementById("email-error").textContent = "Invalid P no"; 
+      // Make the inputs editable
+      nameInput.readOnly = false;
+      emailInput.readOnly = false;
+      // Reset font-weight
+      nameInput.style.fontWeight = "normal";
+      emailInput.style.fontWeight = "normal";
+      // Hide the welcome message
+      document.getElementById("welcome-message").textContent = "";
+      document.getElementById("message-container").style.display = "none";
+    }}</script>
+
+<!-- approver details drop down selection functionality  -->
+<script>
+  function updateApprovers() {
+    var costCentreSelect = document.getElementById("cost-centre");
+    var headApproverSelect = document.getElementById("select-head");
+    var altApproverSelect = document.getElementById("select-alt-app");
+    var selectedCostCentre = costCentreSelect.value;
+    // Reset the values of head and alternate approver selects
+    headApproverSelect.value = "";
+    altApproverSelect.value = "";
+    // Hide options in head and alternate approver selects based on selected cost centre
+    var headOptions = headApproverSelect.querySelectorAll("option");
+    var altOptions = altApproverSelect.querySelectorAll("option");
+    headOptions.forEach(function (option) {
+      option.style.display = option.getAttribute("data-cost-centre") === selectedCostCentre 
+      || option.value === "" ? "block" : "none"; });
+    altOptions.forEach(function (option) {
+      option.style.display = option.getAttribute("data-cost-centre") === selectedCostCentre 
+      || option.value === "" ? "block" : "none";});
+  }</script>
+
+<!-- Problem details  -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var shortProblemDetailInput = document.getElementById("short-problem-detail");
+    var shortProblemDetailCounter = document.getElementById("short-problem-detail-counter");
+    var shortProblemDetailValidation = document.getElementById("short-problem-detail-validation");
+    // extra js 
+    var expandIcon = document.querySelector(".expand-icon");
+    var problemDetailsPopup = document.getElementById("problem-details-popup");
+    var problemDetailsTextarea = document.getElementById("problem-details-textarea");
+    var problemDetailsEnterButton = document.getElementById("problem-details-enter");
+    // extra js 
+
+    var exactLocationInput = document.getElementById("exact-location");
+    var exactLocationCounter = document.getElementById("exact-location-counter");
+    var exactLocationValidation = document.getElementById("exact-location-validation");
+
+    shortProblemDetailInput.addEventListener("input", function () {
+      var shortProblemDetail = this.value.trim();
+      var remainingChars = 30 - shortProblemDetail.length;
+      shortProblemDetailCounter.textContent = remainingChars + " characters remaining";
+      if (remainingChars >= 0) {
+        shortProblemDetailValidation.textContent = "";
+      } else {  shortProblemDetailValidation.textContent = "Exceeded the character limit"; }
+    });
+
+    // extra js function sttart
+    expandIcon.addEventListener("click", function (e) {
+      e.preventDefault();
+      problemDetailsPopup.style.display = "block";
+      problemDetailsTextarea.focus();
+    }); problemDetailsEnterButton.addEventListener("click", function () {
+     problemDetailsPopup.style.display = "none";});
+    var exactLocationInput = document.getElementById("exact-location");
+    var exactLocationCounter = document.getElementById("exact-location-counter");
+    var exactLocationValidation = document.getElementById("exact-location-validation");
+    if (exactLocationInput) {
+      exactLocationInput.addEventListener("input", function () {
+        var exactLocation = this.value.trim();
+        var remainingChars = 90 - exactLocation.length;
+        exactLocationCounter.textContent = remainingChars + " characters remaining";
+        if (remainingChars >= 0) {
+          exactLocationValidation.textContent = "";
+        } else {
+          exactLocationValidation.textContent = "Exceeded the character limit";
+        } });}  });
+</script>
+
+<!-- js for date  -->
+<script>
+  $(document).ready(function () {
+    $("#job-start-date").datepicker({
+      dateFormat: "dd-mm-yy", // Modify the date format as per your preference
+      changeMonth: true,
+      changeYear: true  });  });</script>
+
+<!-- js for phone number validation  -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var contactNumberInput = document.getElementById("contact-number");
+    var contactNumberValidation = document.getElementById("contact-number-validation");
+
+    contactNumberInput.addEventListener("input", function () {
+      var contactNumber = this.value.trim();
+      var validPhoneNumber = /^\d{10}$/; // Regex to match exactly 10 digits
+      if (validPhoneNumber.test(contactNumber)) {
+        contactNumberValidation.textContent = ""; // Clear any previous error message
+      } else {
+        contactNumberValidation.textContent = "Enter a valid 10-digit contact number";
+      } });  });</script>
+
+<!-- js for planning plant selection and tree view  -->
+<script>
+  $(document).ready(function () {
+    var treeData = [
+      {
+        text: "078-TSJ-SHAREDSERVICES",
+        children: [
+          {
+            text: "FMO-fuel Management services",
+            children: [
+              {
+                text: "TSMES-TSM Engg Services",
+                children: [
+                  {
+                    text: "M82-TSM ES Sheeting",
+                  },
+                ],
+              },
+              {
+                text: "TSMES-TSM Engg Services",
+                children: [
+                  {
+                    text: "M82-TSM ES Sheeting",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            text: "ES-engineering and services",
+            children: [
+              {
+                text: "H01-planner group WG",
+                children: [
+                  {
+                    text: "ESROAD Road related",
+                  },
+                ],
+              },
+              {
+                text: "M84-planner group PA",
+                children: [
+                  {
+                    text: "ESTANK Tank Related",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            text: "ME-MED elect-service & transport",
+            children: [
+              {
+                text: "M84-planner group PA",
+                children: [
+                  {
+                    text: "ESTANK Tank Related",
+                  },
+                ],
+              },
+              {
+                text: "H01-planner group WG",
+                children: [
+                  {
+                    text: "ESROAD Road related",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+
+    $('#select-button').on('click', function (e) {
+      e.preventDefault();
+      var offset = $(this).offset();
+      var top = offset.top + $(this).outerHeight();
+      var left = offset.left;
+      $('#tree-popup').css({
+        top: top + 'px',
+        left: left + 'px',
+      }).show();
+    });
+    $('#planning-plant-tree').on('changed.jstree', function (e, data) {
+      var selectedNode = data.instance.get_node(data.selected[0]);
+
+      if (selectedNode.children.length === 3) {
+        $('#planning-plant-input').val(selectedNode.text);
+        $('#service-department-input').val('');
+        $('#planner-group-input').val('');
+        $('#work-center-input').val('');
+      } if (selectedNode.children.length === 2) {
+        $('#service-department-input').val(selectedNode.text);
+        $('#planner-group-input').val('');
+        $('#work-center-input').val('');}
+        if (selectedNode.children.length === 1) {
+        $('#planner-group-input').val(selectedNode.text);
+        $('#work-center-input').val('');}
+
+      if (selectedNode.children.length === 0) {
+        $('#work-center-input').val(selectedNode.text);}}).jstree({
+      core: {
+        data: treeData,
+      },
+      plugins: ['checkbox'],});
+      $('#selection-button').on('click', function () {
+      $('#tree-popup').hide();});
+      $('#cancel-button').on('click', function () {$('#tree-popup').hide();});
+
+    var codingTreeData = [
+      {
+        text: "0753-TSM-Shared Services",
+        children: [
+          {
+            text: "TSMES- TSM Engg Services",
+          },
+          // {
+          //   text: "Female",
+          // },
+          // {
+          //   text: "Others",
+          // },
+        ], },];
+    $('#coding-group-select-button').on('click', function (e) {
+      e.preventDefault();
+      var offset = $(this).offset();
+      var top = offset.top + $(this).outerHeight();
+      var left = offset.left;
+      $('#coding-tree-popup').css({
+        top: top + 'px',
+        left: left + 'px',
+      }).show();
+    });
+    $('#coding-group-tree').on('changed.jstree', function (e, data) {
+      var selectedNode = data.instance.get_node(data.selected[0]);
+      if (selectedNode.text === '0753-TSM-Shared Services') {
+        $('#coding-group-input').val(selectedNode.text);
+        $('#coding-code-input').val('');
+      }
+      if (selectedNode.children.length === 0) {
+        $('#coding-code-input').val(selectedNode.text);
+      }
+    }).jstree({
+      core: {
+        data: codingTreeData,
+      },
+      plugins: ['checkbox'],
+    });
+    $('#coding-selection-button').on('click', function () {
+      $('#coding-tree-popup').hide();
+    });
+    $('#coding-cancel-button').on('click', function () {
+      $('#coding-tree-popup').hide();  });  });
+</script>
+
+<!-- last buttons script  -->
+<script>
+  function openLink() {
+    window.location.href = "https://www.example.com";
+  }
+</script>

@@ -1,0 +1,309 @@
+<section>
+  <div class="container">
+    <div class="inner-container">
+      <div>
+        <h1 class="inner-container-header" style="text-shadow: -1px 
+        -1px 0 #000, 1px -1px 0 #000, -1px 1px 0
+           #000, 1px 1px 0 #000;">CREATE NOTIFICATION
+        </h1>
+        <!-- Message display area -->
+        <div id="message-container">
+          <span id="welcome-message"></span>
+        </div>
+      </div>
+      <div>
+
+        <button class="inner-container-button" style="font-weight: bold
+         !important;">
+          Auto Generated Request Number </button>
+        <div class="division-checkbox-para">
+          <!-- upar wala ka class division-1 tha  -->
+          <div>
+            <p class="inner-para-1">Is it related to FRCP?</p>
+            <p class="inner-para-1">Is it a repeat incident?</p>
+          </div>
+          <div>
+            <div class="checkbox-container">
+              <input class="check" type="checkbox" />
+            </div>
+            <div class="checkbox-container">
+              <input class="check" type="checkbox" />
+            </div>
+          </div>
+        </div>
+
+        <!-- personal details-->
+        <div class="if-container">
+          <div>
+            <h1 class="if-container-header">Request Details</h1>
+            <div class="division-2">
+              <div>
+                <select class="if-input-1" id="pno" onchange="populateData()">
+                  <option value="0">Select your p no*</option>
+                  <option value="1">149344</option>
+                  <option value="2">156709</option>
+                  <option value="3">125436</option>
+                </select>
+                <div>
+                  <input type="text" class="if-input-1" id="name" placeholder="Enter your name*">
+                </div>
+              </div>
+              <div>
+                <input type="text" class="if-input-1" id="email" placeholder="Email id*">
+                <!-- Error message placeholder -->
+                <span id="email-error" style="color: red;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Requester's department details  -->
+        <div class="if-container">
+          <div>
+            <h1 class="if-container-header">Requester's Department Details</h1>
+            <div class="division-2">
+              <div>
+                <input placeholder="Department Code*" id="dept-code" class="if-input-1" type="text" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- approver details  -->
+        <div class="if-container">
+          <div>
+            <h1 class="if-container-header">Approver Details</h1>
+            <div class="division-2">
+              <div>
+                <label for="cost-centre" class="if-label">Select Cost Centre*</label>
+                <select id="cost-centre" class="if-input-1" onchange="updateApprovers()">
+                  <option value="">-</option>
+                  <option value="A">ACE500</option>
+                  <option value="B">ACE334</option>
+                  <option value="C">ACE445</option>
+                </select>
+              </div>
+              <div>
+                <label for="select-head" class="if-label">Select Head Approver*</label>
+                <select class="if-input-1" id="select-head" placeholder="Select head approver">
+                  <option value="">-</option>
+                  <option value="head1" data-cost-centre="A">Mr Harry</option>
+                  <option value="head2" data-cost-centre="B">Mr Sunny</option>
+                  <option value="head3" data-cost-centre="C">Mr Aditya</option>
+                </select>
+              </div>
+              <div>
+                <label for="select-alt-app" class="if-label">Select Alternate Approver*</label>
+                <select class="if-input-1" id="select-alt-app" aria-placeholder="Select Alternate Approver">
+                  <option value="">-</option>
+                  <option value="app1" data-cost-centre="A">Mr Naman</option>
+                  <option value="app2" data-cost-centre="B">Mr Keshav</option>
+                  <option value="app3" data-cost-centre="C">Ms Sneha</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- non mandatory fields  -->
+        <div class="if-container">
+          <div>
+            <h1 class="if-container-header">Non-mandotary Fields</h1>
+            <div class="division-2">
+              <div>
+                <input placeholder="Enter Sanction Reference" class="if-input-1" type="text" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- mandatory fields  -->
+        <div class="if-container">
+          <div>
+            <h1 class="if-container-header">Mandatory Fields</h1>
+            <div class="division-2">
+              <div>
+                <label for="job-start-date" class="if-label">Job start Date*</label>
+                <input placeholder="Job Start Date*" class="if-input-1" type="date" />
+              </div>
+              <div>
+                <label for="expected-cost" class="if-label">Enter Expected Cost*</label>
+                <input placeholder="Enter Expected Cost*" class="if-input-1" type="text" />
+              </div>
+            </div>s
+          </div>
+        </div>
+
+        <!-- contact details  -->
+        <div class="if-container">
+          <div>
+            <h1 class="if-container-header">Contact Details</h1>
+            <div class="division-2">
+              <div>
+                <label for="contact-person-name" class="if-label">Enter Contact Person Name:*</label>
+                <input placeholder="Enter contact person name*" id="contact-person-name" class="if-input-1"
+                  type="text" />
+              </div>
+              <div>
+                <label for="contact-number">Enter Contact Number:*</label>
+                <input placeholder="Enter contact number*" id="contact-number" class="if-input-1" type="number" />
+                <span id="contact-number-validation"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- problem details  -->
+        <div class="if-container">
+          <div>
+            <h1 class="if-container-header">Problem Details</h1>
+            <!-- sub-section planning plant selection -->
+            <div>
+              <div class="input-group">
+                <h4 class="if-label">Planning Plant Selection*</h4>
+                <!-- .....  -->
+                <div class="input-wrapper">
+                  <a href="#" id="select-button" class="select-icon"><i class="fas fa-tree"></i></a>
+                  <h6 style="color: lightgrey;">(click the icon to select)</h6>
+                </div>
+              </div>
+              <!-- ....  -->
+              <div>
+                <input placeholder="Planning plant section*" class="if-input-2" type="text" id="planning-plant-input"
+                  readonly />
+              </div>
+              <div>
+                <input placeholder="Service Department*" class="if-input-2" type="text" id="service-department-input"
+                  readonly />
+              </div>
+              <div>
+                <input placeholder="Planner Group*" class="if-input-2" type="text" id="planner-group-input" readonly />
+              </div>
+              <div>
+                <input placeholder="Work Center*" class="if-input-2" type="text" id="work-center-input" readonly />
+              </div>
+            </div>
+            <div id="tree-popup">
+              <div id="planning-plant-tree"></div>
+              <div>
+                <button id="selection-button">Selection</button>
+                <button id="cancel-button">Cancel</button>
+              </div>
+            </div>
+
+
+
+            <!--sub-section: coding group selection  -->
+            <br> <br>
+            <div>
+              <div class="input-group">
+                <h4 class="if-label">Coding Group Selection* </h4>
+                <div class="input-wrapper">
+                  <a href="#" id="coding-group-select-button" class="select-icon">
+                    <i class="fas fa-tree"></i></a>
+                  <h6 style="color: lightgrey;">(click the icon to select)</h6>
+                  <div id="coding-tree-popup">
+                    <div id="coding-group-tree"></div>
+                    <div>
+                      <button id="coding-selection-button">Select</button>
+                      <button id="coding-cancel-button">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <input placeholder="Coding Group *" class="if-input-2" type="text" id="coding-group-input" readonly />
+              </div>
+              <div>
+                <input placeholder="Coding Code*" class="if-input-2" type="text" id="coding-code-input" readonly />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- problem details  -->
+        <div class="if-container">
+          <div>
+            <h1 class="if-container-header">Problem Details</h1>
+            <!-- sub-section:short problem details  -->
+            <div>
+              <label for="short-problem-detail" class="if-label">Enter Short Problem Detail(max 30 characters)*</label>
+              <div class="input-wrapper">
+                <input type="text" id="short-problem-detail" class="if-input-2" maxlength="30">
+                <a href="#" class="expand-icon"><i class="fas fa-arrows-alt"></i></a>
+              </div>
+              <p style="padding-left: 20px; font-size: 17px; color: lightgrey;">NOTE:Tap on the icon for long text</p>
+              <span id="short-problem-detail-counter"></span>
+              <span id="short-problem-detail-validation"></span>
+            </div>
+
+            <!-- sub-section:functional location  -->
+            <br>
+            <div>
+              <label for="functional-location" class="if-label">Enter
+                Functional Detail*</label>
+              <input type="text" class="if-input-2" id="myInput" placeholder="Functional Location*">
+              <a href="#" class="if-input-2" onclick="selectValue('Location you selected')">Select Value</a>
+            </div><br>
+
+            <!-- sub:-section:exact location  -->
+            <br>
+            <div>
+              <label for="exact-location" class="if-label">Enter Exact Location(max 90
+                characters)*</label>
+              <input type="text" class="if-input-2" id="exact-location" maxlength="90">
+              <span id="exact-location-counter"></span>
+              <span id="exact-location-validation"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- popup  -->
+        <div id="problem-details-popup" class="popup-container">
+          <textarea id="problem-details-textarea" rows="5"></textarea>
+          <button id="problem-details-enter">Enter</button>
+        </div>
+
+
+        <!-- bottom html  -->
+        <div class="if-container">
+          <div class="division-1">
+            <div>
+              <p class="inner-para-2">Repair/Strengthening</p>
+              <p class="inner-para-2">Modification/New Construction</p>
+              <button onclick="openLink()" class="inner-container-button" style="font-weight: bold !important;">Click to
+                view circular for modification</button>
+              <script>
+                function openLink() {
+                  window.location.href = "https://www.example.com";
+                }</script>
+            </div>
+            <div>
+              <div>
+                <label>
+                  <input class="check-2" type="checkbox" />
+                </label>
+              </div>
+              <label>
+                <input type="checkbox" />
+              </label>
+            </div>
+            <!-- </div>  -->
+            <!-- <div class="division-1"> -->
+            <!-- <div class="if-input-1"> -->
+            <div>
+              <button onclick="openLink()" class="inner-container-button"
+                style="font-weight: bold !important;">Create</button>
+            </div>
+            <div>
+              <button class="inner-container-button" onclick="openLink()" class="inner-container-buttons"
+                style="font-weight: bold !important;">Reset</button>
+            </div>
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- division 1 ka div down  -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
